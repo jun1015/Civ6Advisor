@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Mod id="Civ6AdvisorBridge" version="1">
+    <Properties>
+        <Name>Civ6 AI Advisor Bridge</Name>
+        <Description>Adds a button next to the Civilopedia button in the top bar. Clicking it signals the external advisor program to show its window. This mod contains no AI logic itself - it only sends the signal out through Lua.log.</Description>
+        <Teaser>In-game button that opens the external AI advisor.</Teaser>
+        <Authors>A.I.</Authors>
+        <CompatibleVersions>2.0</CompatibleVersions>
+    </Properties>
+    <InGameActions>
+        <AddUserInterfaces id="AdvisorLauncherUI">
+            <Properties>
+                <Context>InGame</Context>
+            </Properties>
+            <File>UI/Additions/AdvisorLauncher.xml</File>
+        </AddUserInterfaces>
+        <ImportFiles id="AdvisorLauncherFiles">
+            <File>UI/Additions/AdvisorLauncher.xml</File>
+            <File>UI/Additions/AdvisorLauncher.lua</File>
+        </ImportFiles>
+        <UpdateText id="AdvisorLauncherText">
+            <File>Text/AdvisorText.xml</File>
+        </UpdateText>
+    </InGameActions>
+    <Files>
+        <File>UI/Additions/AdvisorLauncher.xml</File>
+        <File>UI/Additions/AdvisorLauncher.lua</File>
+        <File>Text/AdvisorText.xml</File>
+    </Files>
+</Mod>

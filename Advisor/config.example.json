@@ -1,0 +1,10 @@
+{
+  "provider": "deepseek",
+  "base_url": "",
+  "model": "",
+  "temperature": 0.3,
+  "timeout": 120,
+  "max_steps": 8,
+  "max_turns": 10,
+  "proxy": null
+}

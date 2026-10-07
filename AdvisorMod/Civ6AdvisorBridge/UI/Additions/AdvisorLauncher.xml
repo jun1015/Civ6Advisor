@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    顾问按钮 —— 游戏内唯一的视觉入口
+    =====================================================================
+    一个 29x29 的按钮，贴图直接复用游戏自己的 TopBar_CivilopediaButton，
+    所以它看起来天生就是游戏 UI 的一部分，不需要任何美术资源。
+
+    ⚠️ 位置不在这里写死，全部由 AdvisorLauncher.lua 在运行时决定，分两条路：
+      1. 挂进顶栏自己的按钮栈（/InGame/TopPanel/RightContents）——
+         位置完全由游戏算，换分辨率、改缩放都不会错位。
+      2. 挂不进去就按 UIManager:GetScreenSizeVal() 自己算绝对坐标。
+    两条路都带完整的时序重试（Initialize 那一刻顶栏往往还没建好，
+    一次不成不代表永远不成 —— 见 AttachToTopBar 的注释）。
+
+    为什么这里不写 Anchor="R,T" + 一个固定 Offset：
+      本控件的父容器就是这个 Context 的根控件（ContextPtr）本身。
+      而顶层 Context 的尺寸**写在 XML 里是无效的** —— 既吃不到 Size 属性，
+      也不会自动撑开（UI Plugins Framework 的实证结论）。
+      父容器没有确定尺寸，任何角落锚点都是在赌，赌错就落到屏幕外，而且**不报错**。
+      正解是在 Lua 里先 ContextPtr:SetSizeX/Y(屏幕尺寸)，再按下算好的偏移摆
+      —— 见 PlaceByScreenCoords()。
+
+    所以：按钮**不要再套一层 Container**。套了就多出一个尺寸未知的中间层，
+    "父容器 = ContextPtr"这个前提也会失效。
+
+    下面这个 Anchor="C,C" Offset="0,0" 只是 Lua 完全没跑起来时的兜底：
+    两条路都失败时按钮落在父容器中心 —— 看得见、点得到，方便排查。
+
+    ⚠️ 注意：**挂进顶栏按钮栈时，这个 C,C 会被 Lua 换掉**（见 StackChildAnchor）。
+    栈里的原版按钮都不写 Anchor、用的是默认值，我们带着 C,C 进去就会错开
+    半个身位，和旁边的文字/图标叠上。所以那个 C,C 只服务于"兜底"这一种情况，
+    不要以为它同时管着挂栈的情况。
+-->
+<Context>
+    <Button ID="AdvisorToggleButton"
+            Anchor="C,C"
+            Offset="0,0"
+            Size="29,29"
+            Texture="TopBar_CivilopediaButton"
+            ToolTip="LOC_ADVISOR_BUTTON_TIP"/>
+</Context>

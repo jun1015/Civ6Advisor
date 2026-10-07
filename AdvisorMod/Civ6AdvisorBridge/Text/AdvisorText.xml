@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    按钮的悬停提示文字。
+    鼠标停在顾问按钮上时显示的这行字。
+-->
+<GameData>
+    <LocalizedText>
+        <Row Tag="LOC_ADVISOR_BUTTON_TIP" Language="zh_Hans_CN">
+            <Text>AI 顾问　[F8]</Text>
+        </Row>
+        <Row Tag="LOC_ADVISOR_BUTTON_TIP" Language="en_US">
+            <Text>AI Advisor  [F8]</Text>
+        </Row>
+    </LocalizedText>
+</GameData>

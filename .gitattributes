@@ -1,0 +1,22 @@
+# 换行符统一，免得不同机器 checkout 之后文件"全变了"
+* text=auto
+
+# 游戏读的脚本 / 我们的代码：一律 LF
+# （AdvisorLauncher.lua 是逐字节验证过的：LF、无 BOM。别让 git 改成 CRLF。）
+*.lua      text eol=lf
+*.py       text eol=lf
+*.xml      text eol=lf
+*.modinfo  text eol=lf
+*.dep      text eol=lf
+*.json     text eol=lf
+
+# 无扩展名的文本文件，显式写一下免得被当成二进制
+LICENSE    text eol=lf
+*.md       text eol=lf
+
+# Windows 批处理必须是 CRLF，否则个别场景会报错
+*.bat      text eol=crlf
+
+# 二进制，别碰
+*.ico      binary
+*.exe      binary
